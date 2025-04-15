@@ -9,7 +9,7 @@ const CoursesPage = async () => {
   })
 
   return (
-    <div className="p-6">
+    <div className="p-6 ">
       <h1 className="text-3xl font-bold mb-6">All Courses</h1>
       <div className="grid md:grid-cols-3 gap-4">
         {courses.map((course: any) => (
