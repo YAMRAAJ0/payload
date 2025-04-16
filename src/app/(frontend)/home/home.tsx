@@ -1,27 +1,24 @@
 import React from "react";
 
-const HeroSection = ({ data }: {data:any}) => {
+const HeroSection = ({ data }: { data: any }) => {
   const { heroTitle, heroetext, heroImage } = data || {};
   const imageUrl = heroImage?.url || "";
 
   return (
-    <section className="w-full bg-gray-900 py-12">
-      <div className="container mx-auto px-4 flex flex-col-reverse lg:flex-row items-center justify-between gap-8">
-        <div className="lg:w-1/2 text-center lg:text-left">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+    <section
+      className="w-full md:pt-24 bg-gray-900 py-12 bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: imageUrl ? `url(${imageUrl})` : "none",
+      }}
+    >
+      <div className="bg-black bg-opacity-70 w-full h-full">
+        <div className="container mx-auto px-4 flex flex-col items-center lg:items-start text-center lg:text-left gap-6 py-16">
+          <h1 className="text-4xl md:text-5xl font-bold text-white">
             {heroTitle}
           </h1>
-          <p className="text-lg text-gray-300">
+          <p className="text-lg text-gray-300 max-w-2xl">
             {heroetext}
           </p>
-        </div>
-
-        <div className="lg:w-1/2">
-          <img
-            src={imageUrl}
-            alt={heroImage?.alt || "Hero Image"}
-            className="rounded-lg shadow-lg w-full max-h-[500px] object-cover"
-          />
         </div>
       </div>
     </section>

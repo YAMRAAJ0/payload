@@ -16,7 +16,7 @@ interface Blog {
 
 const BlogList = ({ blogs }: { blogs: Blog[] }) => {
   return (
-    <section className="py-24 bg-black ">
+    <section className="md:py-28 bg-black ">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Latest Blogs</h2>
         <div className="grid md:grid-cols-3 gap-6">

@@ -16,8 +16,8 @@ const HomeServer = async () => {
     <>
       <HomeClient data={heroData} />
       <Cards />
-      <GridCards />
       <ListCards />
+      <GridCards />    
       <Customer />
     </>
   )

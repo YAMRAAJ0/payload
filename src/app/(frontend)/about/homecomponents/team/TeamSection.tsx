@@ -1,41 +1,41 @@
-import React from "react";
+import React from 'react'
+import Image from 'next/image'
 
 const TeamSection = ({ data }: { data: any }) => {
-  const { title, description, member } = data || {};
+  const { title, description, member } = data || {}
 
   return (
-    <section className="w-full bg-gray-900 py-12">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-          {title}
-        </h2>
-        <p className="text-gray-300 max-w-2xl mx-auto mb-10">{description}</p>
+    <section className="w-full bg-black py-16 text-white">
+      <div className="max-w-7xl mx-auto px-6 text-center">
+        <h1 className="text-4xl md:text-5xl font-bold text-green-400 mb-4">{title}</h1>
+        <p className="text-lg md:text-xl text-gray-300 mb-12">{description}</p>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 place-items-center">
           {member?.map((person: any) => (
             <div
               key={person.id}
-              className="bg-gray-800 p-6 rounded-2xl shadow-lg w-full max-w-sm hover:shadow-xl transition"
+              className="bg-gray-900 p-6 w-full max-w-sm rounded-2xl shadow-lg hover:shadow-xl transition duration-300 flex flex-col items-center text-center"
             >
-              <img
-                src={person.img?.url}
-                alt={person.img?.alt || person.name}
-                className="w-32 h-32 object-cover rounded-full mx-auto mb-4 border-4 border-blue-500"
-              />
-              <h3 className="text-xl font-semibold text-white">
-                {person.name}
-              </h3>
-              <p className="text-blue-400">{person.post}</p>
-
+              <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52 mb-4">
+                <Image
+                  src={person.img?.url}
+                  alt={person.img?.alt || person.name}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-full border-4 border-green-400 shadow-md"
+                />
+              </div>
+              <h2 className="text-xl font-semibold text-white">{person.name}</h2>
+              <p className="text-sm text-gray-400 mb-3">{person.post}</p>
               {person.Link?.length > 0 && (
-                <div className="mt-4 flex justify-center gap-4">
+                <div className="flex space-x-4 mt-2 justify-center">
                   {person.Link.map((link: any, i: number) => (
                     <a
                       key={i}
                       href={link?.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-white transition"
+                      className="text-gray-400 hover:text-green-400 transition-colors duration-200 text-sm"
                     >
                       {link.label}
                     </a>
@@ -47,7 +47,7 @@ const TeamSection = ({ data }: { data: any }) => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default TeamSection;
+export default TeamSection

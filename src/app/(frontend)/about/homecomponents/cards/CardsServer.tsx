@@ -6,7 +6,7 @@ import CardsSection from "./CardsSection";
 const CardsServer = async () => {
   const payload = await getPayload({ config });
   const { docs } = await payload.find({ collection: "cards" });
-  const Data = docs[0]; 
+  const Data = docs[1]; 
 
   return <>
   <CardsSection data={Data} />

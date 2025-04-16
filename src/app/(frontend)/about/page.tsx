@@ -15,7 +15,7 @@ const HomeServer = async () => {
 
   return (
     <>
-      <HomeClient data={heroData} />
+      {/* <HomeClient data={heroData} /> */}
       <Cards />
       
       {/* <GridCards />
