@@ -1,12 +1,17 @@
+// src/app/(frontend)/courses/[courseName]/CourseDetailWrapper.tsx
 'use client'
 
 import dynamic from 'next/dynamic'
 
-// Dynamically import your client component with ssr: false
+// Dynamically import the actual course detail component
 const CourseDetailClient = dynamic(() => import('./CourseDetailClient'), {
   ssr: false,
 })
 
-export default function CourseDetailWrapper({ courseName }: { courseName: string }) {
+interface Props {
+  courseName: string
+}
+
+export default function CourseDetailWrapper({ courseName }: Props) {
   return <CourseDetailClient courseName={courseName} />
 }

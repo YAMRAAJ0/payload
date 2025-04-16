@@ -1,13 +1,13 @@
-// src/app/(frontend)/courses/[courseName]/page.tsx
-
 import CourseDetailWrapper from './CourseDetailWrapper'
 
-interface PageProps {
+interface Props {
   params: {
     courseName: string
   }
 }
 
-export default function CourseDetailPage({ params }: PageProps) {
-  return <CourseDetailWrapper courseName={params.courseName} />
+export default async function Page({ params }: Props) {
+  const { courseName } = await Promise.resolve(params)
+
+  return <CourseDetailWrapper courseName={courseName} />
 }

@@ -1,3 +1,4 @@
+
 // src/app/(frontend)/courses/[courseName]/CourseDetailClient.tsx
 'use client'
 import { useEffect, useState } from 'react'
@@ -76,12 +77,13 @@ interface Props {
       <div className="lg:col-span-2 p-4 w-fit h-fit">
         <h2 className="text-2xl font-bold mb-4 bg-black text-white">What You’ll Learn</h2>
         <ul className="list-none grid grid-cols-1 text-white md:grid-cols-2 bg-gray-900 opacity-70 rounded-lg p-8 gap-2">
-        {course.Learn.map((item, index) => (
+        {course.Learn.map((item: any, index) => (
   <li key={index} className="flex items-center space-x-2">
     <IconCircleDashedCheck width={20} height={20} className="w-8" stroke={2} />
-    <span>{item}</span>
+    <span>{typeof item === 'object' ? item.Learn : item}</span>
   </li>
 ))}
+
 
         </ul>
 

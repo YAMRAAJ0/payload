@@ -12,6 +12,7 @@ export default function Navbar({ navItems }: { navItems: any[] }) {
   const [menuOpen, setMenuOpen] = useState(false);
   // const [menuTimeout, setMenuTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
 
+
   useEffect(() => {
     const updateTime = () => {
       const indianTime = new Date().toLocaleTimeString("en-IN", {

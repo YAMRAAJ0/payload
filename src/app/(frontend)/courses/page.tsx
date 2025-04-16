@@ -1,12 +1,20 @@
-import { getPayload } from 'payload'
-import config from '@payload-config'
+
 import Link from 'next/link'
+import configPromise from '@payload-config'
+import { getPayload } from 'payload'
+import React from 'react'
+
 
 const CoursesPage = async () => {
-  const payload = await getPayload({ config })
-  const { docs: courses } = await payload.find({
-    collection: 'course',
-  })
+  const payload = await getPayload({ config: configPromise })
+    const { docs: courses } = await payload.find({
+      collection: 'course',
+      draft: false,
+      limit: 1000,
+      overrideAccess: false,
+      pagination: false,
+    })
+
 
   return (
     <div className="p-6 ">
