@@ -13,7 +13,7 @@ export default function Navbar({ footerItems }: { footerItems: any[] }) {
               {/* Brand & Socials */}
               <div className="space-y-4">
                 <Link href="/" className="flex items-center space-x-2 text-2xl font-medium text-white">
-                  <Image src="/devopsfarm-logo.png" alt="DevOpsFarm Logo" width={64} height={64} className="w-16" />
+                  <Image src={item.brand.logo.url} alt="DevOpsFarm Logo" width={64} height={64} className="w-16" />
                   <span>{item.title}</span>
                 </Link>
                 <p className="text-gray-400 max-w-md text-sm">
@@ -21,7 +21,8 @@ export default function Navbar({ footerItems }: { footerItems: any[] }) {
                   <br />
                   {item.brand.email}
                   <br />
-                  {item?.brand?.phone?.join(", ")}
+                  {item?.brand?.phone?.map((p: { number: string }) => p.number).join(", ")}
+
                 </p>
                 <div className="flex space-x-3">
                   {item.socials.map((social: { url: string | undefined; icon: { url: string | StaticImport; alt: any; }; }, index: React.Key | null | undefined) => (

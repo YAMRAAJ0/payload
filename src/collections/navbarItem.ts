@@ -3,8 +3,8 @@ import { CollectionConfig } from "payload";
 const Navbar: CollectionConfig = {
   slug: "navbar",
   labels: {
-    singular: "Navbar",
-    plural: "Navbar",
+    singular: "Navbar Item",
+    plural: "Navbar Items",
   },
   admin: {
     useAsTitle: "label",

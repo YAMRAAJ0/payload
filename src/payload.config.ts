@@ -8,7 +8,7 @@ import sharp from 'sharp'
 import Footer from './collections/footer'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
-import Navbar from './collections/navbar'
+import NavbarItem from './collections/navbarItem'
 import Cards from './collections/cards'
 import Home from './collections/Home'
 import Gridcards from './collections/gridcards'
@@ -53,7 +53,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [courses,Users, Media, Footer, Navbar, Home, Cards, Gridcards,List, Customer,Team,Blogs],
+  collections: [courses,Users, Media, Footer, NavbarItem, Home, Cards, Gridcards,List, Customer,Team,Blogs],
   editor: lexicalEditor(),
   secret: PAYLOAD_SECRET,
   typescript: {

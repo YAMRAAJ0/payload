@@ -10,7 +10,6 @@ import Sidebar from "./sidebar";
 export default function Navbar({ navItems }: { navItems: any[] }) {
   const [time, setTime] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
-  // const [menuTimeout, setMenuTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
 
 
   useEffect(() => {
