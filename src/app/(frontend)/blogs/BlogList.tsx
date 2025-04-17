@@ -1,3 +1,5 @@
+//BlogList.tsx
+
 'use client';
 import React from 'react';
 import BlogCard from './BlogCard';

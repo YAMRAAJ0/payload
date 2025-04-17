@@ -12,13 +12,12 @@ import Navbar from './collections/navbar'
 import Cards from './collections/cards'
 import Home from './collections/Home'
 import Gridcards from './collections/gridcards'
-import Course from './collections/course'
 import Customer from './collections/customer'
 import Team from './collections/team'
 import List from './collections/list'
 import Blogs from './collections/blogs'
 import { s3Storage } from '@payloadcms/storage-s3'
-
+import { courses } from './collections/courses'
 const {
   S3_BUCKET,
   S3_ACCESS_KEY_ID,
@@ -54,7 +53,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Footer, Navbar, Home, Cards, Gridcards,List, Customer,Team,Blogs,Course],
+  collections: [courses,Users, Media, Footer, Navbar, Home, Cards, Gridcards,List, Customer,Team,Blogs],
   editor: lexicalEditor(),
   secret: PAYLOAD_SECRET,
   typescript: {

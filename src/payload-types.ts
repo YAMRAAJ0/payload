@@ -67,6 +67,7 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    courses: Course;
     users: User;
     media: Media;
     footer1: Footer1;
@@ -78,13 +79,13 @@ export interface Config {
     customer: Customer;
     team: Team;
     blogs: Blog;
-    course: Course;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
   collectionsJoins: {};
   collectionsSelect: {
+    courses: CoursesSelect<false> | CoursesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     footer1: Footer1Select<false> | Footer1Select<true>;
@@ -96,7 +97,6 @@ export interface Config {
     customer: CustomerSelect<false> | CustomerSelect<true>;
     team: TeamSelect<false> | TeamSelect<true>;
     blogs: BlogsSelect<false> | BlogsSelect<true>;
-    course: CourseSelect<false> | CourseSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -135,20 +135,35 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
+ * via the `definition` "courses".
  */
-export interface User {
+export interface Course {
   id: string;
+  courseName?: string | null;
+  title: string;
+  text?: string | null;
+  img?: (string | null) | Media;
+  likeText?: string | null;
+  Learn?:
+    | {
+        Learn?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  CourseContent?:
+    | {
+        ContentTitle?: string | null;
+        Content?:
+          | {
+              Content?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -168,6 +183,23 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: string;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -397,43 +429,15 @@ export interface Blog {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "course".
- */
-export interface Course {
-  id: string;
-  courseName?: string | null;
-  title?: string | null;
-  text?: string | null;
-  img?: (string | null) | Media;
-  likeText?: string | null;
-  Learn?:
-    | {
-        Learn?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  CourseContent?:
-    | {
-        ContentTitle?: string | null;
-        Content?:
-          | {
-              Content?: string | null;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
   id: string;
   document?:
+    | ({
+        relationTo: 'courses';
+        value: string | Course;
+      } | null)
     | ({
         relationTo: 'users';
         value: string | User;
@@ -477,10 +481,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'blogs';
         value: string | Blog;
-      } | null)
-    | ({
-        relationTo: 'course';
-        value: string | Course;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -523,6 +523,37 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "courses_select".
+ */
+export interface CoursesSelect<T extends boolean = true> {
+  courseName?: T;
+  title?: T;
+  text?: T;
+  img?: T;
+  likeText?: T;
+  Learn?:
+    | T
+    | {
+        Learn?: T;
+        id?: T;
+      };
+  CourseContent?:
+    | T
+    | {
+        ContentTitle?: T;
+        Content?:
+          | T
+          | {
+              Content?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -763,37 +794,6 @@ export interface BlogsSelect<T extends boolean = true> {
         id?: T;
       };
   isFeatured?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "course_select".
- */
-export interface CourseSelect<T extends boolean = true> {
-  courseName?: T;
-  title?: T;
-  text?: T;
-  img?: T;
-  likeText?: T;
-  Learn?:
-    | T
-    | {
-        Learn?: T;
-        id?: T;
-      };
-  CourseContent?:
-    | T
-    | {
-        ContentTitle?: T;
-        Content?:
-          | T
-          | {
-              Content?: T;
-              id?: T;
-            };
-        id?: T;
-      };
   updatedAt?: T;
   createdAt?: T;
 }
