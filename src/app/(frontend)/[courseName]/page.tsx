@@ -47,7 +47,6 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
   if (!course) return notFound();
 
-
   return (
     <article>
       <CourseDetailClient courseName={courseName} />

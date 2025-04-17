@@ -17,7 +17,7 @@ export interface CourseType {
   Learn: (string | React.ReactNode)[];
   CourseContent: {
     ContentTitle: string;
-    Content: (string | React.ReactNode)[];
+    Content: { Content: string }[];
   }[];
   likeText?: string;
 }
@@ -99,8 +99,9 @@ export default function CourseDetailClient({ courseName }: Props) {
                     >
                       <div className="p-4 bg-gray-900 text-gray-100 space-y-2">
                       {section.Content.map((point, pointIndex) => (
-                          <li key={pointIndex}>{point}</li>
-                        ))}
+  <li key={pointIndex}>{point?.Content ?? 'No content available'}</li>
+))}
+
                       </div>
                     </motion.div>
                   )}
