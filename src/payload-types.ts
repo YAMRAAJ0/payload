@@ -79,6 +79,8 @@ export interface Config {
     customer: Customer;
     team: Team;
     blogs: Blog;
+    officeexpenses: Officeexpense;
+    officerequirements: Officerequirement;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -97,6 +99,8 @@ export interface Config {
     customer: CustomerSelect<false> | CustomerSelect<true>;
     team: TeamSelect<false> | TeamSelect<true>;
     blogs: BlogsSelect<false> | BlogsSelect<true>;
+    officeexpenses: OfficeexpensesSelect<false> | OfficeexpensesSelect<true>;
+    officerequirements: OfficerequirementsSelect<false> | OfficerequirementsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -429,6 +433,46 @@ export interface Blog {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "officeexpenses".
+ */
+export interface Officeexpense {
+  id: string;
+  title: string;
+  date: string;
+  amount: number;
+  category: 'office_supplies' | 'rent' | 'utilities' | 'maintenance' | 'miscellaneous';
+  description: string;
+  status: 'pending' | 'approved' | 'rejected';
+  invoice?: (string | null) | Media;
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "officerequirements".
+ */
+export interface Officerequirement {
+  id: string;
+  title: string;
+  submittedBy: string | User;
+  department: 'hr' | 'it' | 'finance' | 'operations' | 'marketing' | 'other';
+  priority: 'high' | 'medium' | 'low';
+  requiredBy: string;
+  category: 'office_supplies' | 'equipment' | 'software' | 'furniture' | 'maintenance' | 'miscellaneous';
+  description: string;
+  quantity: number;
+  estimatedCost: number;
+  status: 'pending_approval' | 'approved' | 'rejected' | 'in_progress' | 'completed';
+  approver?: (string | null) | User;
+  approvalDate?: string | null;
+  document?: (string | null) | Media;
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -481,6 +525,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'blogs';
         value: string | Blog;
+      } | null)
+    | ({
+        relationTo: 'officeexpenses';
+        value: string | Officeexpense;
+      } | null)
+    | ({
+        relationTo: 'officerequirements';
+        value: string | Officerequirement;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -794,6 +846,44 @@ export interface BlogsSelect<T extends boolean = true> {
         id?: T;
       };
   isFeatured?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "officeexpenses_select".
+ */
+export interface OfficeexpensesSelect<T extends boolean = true> {
+  title?: T;
+  date?: T;
+  amount?: T;
+  category?: T;
+  description?: T;
+  status?: T;
+  invoice?: T;
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "officerequirements_select".
+ */
+export interface OfficerequirementsSelect<T extends boolean = true> {
+  title?: T;
+  submittedBy?: T;
+  department?: T;
+  priority?: T;
+  requiredBy?: T;
+  category?: T;
+  description?: T;
+  quantity?: T;
+  estimatedCost?: T;
+  status?: T;
+  approver?: T;
+  approvalDate?: T;
+  document?: T;
+  notes?: T;
   updatedAt?: T;
   createdAt?: T;
 }

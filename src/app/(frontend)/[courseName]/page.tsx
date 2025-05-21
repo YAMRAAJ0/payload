@@ -17,12 +17,7 @@ type CourseContentItem = {
   Content?: { Content: string }[];
 };
 
-type CourseType = {
-  title: string;
-  text: string;
-  Learn?: LearnItem[] | null;
-  CourseContent?: CourseContentItem[] | null;
-};
+
 
 export default async function CoursePage({ params }: CoursePageProps) { 
   const resolvedParams = await params; 

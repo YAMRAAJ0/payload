@@ -1,5 +1,4 @@
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -18,17 +17,18 @@ import List from './collections/list'
 import Blogs from './collections/blogs'
 import { s3Storage } from '@payloadcms/storage-s3'
 import { courses } from './collections/courses'
+import OfficeExpenses from './collections/officeexpenses'
+import OfficeRequirements from './collections/officerequirements'
 const {
   S3_BUCKET,
   S3_ACCESS_KEY_ID,
   S3_SECRET_ACCESS_KEY,
   DATABASE_URI,
   S3_ENDPONT,
-  PAYLOAD_SECRET
-} = process.env;
+  PAYLOAD_SECRET,
+} = process.env
 
-
-if (!S3_BUCKET || !S3_ACCESS_KEY_ID || !S3_SECRET_ACCESS_KEY || !S3_ENDPONT ) {
+if (!S3_BUCKET || !S3_ACCESS_KEY_ID || !S3_SECRET_ACCESS_KEY || !S3_ENDPONT) {
   throw new Error('Missing required environment variables for S3 configuration')
 }
 
@@ -40,9 +40,6 @@ if (!PAYLOAD_SECRET) {
   throw new Error('Missing PAYLOAD_SECRET environment variable')
 }
 
-
-
-
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -53,7 +50,22 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [courses,Users, Media, Footer, NavbarItem, Home, Cards, Gridcards,List, Customer,Team,Blogs],
+  collections: [
+    courses,
+    Users,
+    Media,
+    Footer,
+    NavbarItem,
+    Home,
+    Cards,
+    Gridcards,
+    List,
+    Customer,
+    Team,
+    Blogs,
+    OfficeExpenses,
+    OfficeRequirements,
+  ],
   editor: lexicalEditor(),
   secret: PAYLOAD_SECRET,
   typescript: {
@@ -76,9 +88,7 @@ export default buildConfig({
         },
         region: 'auto',
         endpoint: process.env.S3_ENDPONT || '',
-      }
+      },
     }),
-    // payloadCloudPlugin(),
-    
   ],
 })
