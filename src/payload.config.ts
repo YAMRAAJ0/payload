@@ -19,6 +19,7 @@ import { s3Storage } from '@payloadcms/storage-s3'
 import { courses } from './collections/courses'
 import OfficeExpenses from './collections/officeexpenses'
 import OfficeRequirements from './collections/officerequirements'
+import WeekWorksheet from './collections/weekworksheet'
 const {
   S3_BUCKET,
   S3_ACCESS_KEY_ID,
@@ -65,6 +66,7 @@ export default buildConfig({
     Blogs,
     OfficeExpenses,
     OfficeRequirements,
+    WeekWorksheet,
   ],
   editor: lexicalEditor(),
   secret: PAYLOAD_SECRET,

@@ -81,6 +81,7 @@ export interface Config {
     blogs: Blog;
     officeexpenses: Officeexpense;
     officerequirements: Officerequirement;
+    weekworksheet: Weekworksheet;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -101,6 +102,7 @@ export interface Config {
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     officeexpenses: OfficeexpensesSelect<false> | OfficeexpensesSelect<true>;
     officerequirements: OfficerequirementsSelect<false> | OfficerequirementsSelect<true>;
+    weekworksheet: WeekworksheetSelect<false> | WeekworksheetSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -194,6 +196,12 @@ export interface Media {
  */
 export interface User {
   id: string;
+  roles: ('owner' | 'employee')[];
+  firstName: string;
+  department?: string | null;
+  joiningDate?: string | null;
+  phone?: string | null;
+  address?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -473,6 +481,44 @@ export interface Officerequirement {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "weekworksheet".
+ */
+export interface Weekworksheet {
+  id: string;
+  employeeName: string;
+  weekStartDate: string;
+  monday?: {
+    tasks?: string | null;
+    hours?: number | null;
+    notes?: string | null;
+  };
+  tuesday?: {
+    tasks?: string | null;
+    hours?: number | null;
+    notes?: string | null;
+  };
+  wednesday?: {
+    tasks?: string | null;
+    hours?: number | null;
+    notes?: string | null;
+  };
+  thursday?: {
+    tasks?: string | null;
+    hours?: number | null;
+    notes?: string | null;
+  };
+  friday?: {
+    tasks?: string | null;
+    hours?: number | null;
+    notes?: string | null;
+  };
+  totalHours?: number | null;
+  status?: ('pending' | 'approved' | 'rejected') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -533,6 +579,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'officerequirements';
         value: string | Officerequirement;
+      } | null)
+    | ({
+        relationTo: 'weekworksheet';
+        value: string | Weekworksheet;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -612,6 +662,12 @@ export interface CoursesSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  roles?: T;
+  firstName?: T;
+  department?: T;
+  joiningDate?: T;
+  phone?: T;
+  address?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -884,6 +940,53 @@ export interface OfficerequirementsSelect<T extends boolean = true> {
   approvalDate?: T;
   document?: T;
   notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "weekworksheet_select".
+ */
+export interface WeekworksheetSelect<T extends boolean = true> {
+  employeeName?: T;
+  weekStartDate?: T;
+  monday?:
+    | T
+    | {
+        tasks?: T;
+        hours?: T;
+        notes?: T;
+      };
+  tuesday?:
+    | T
+    | {
+        tasks?: T;
+        hours?: T;
+        notes?: T;
+      };
+  wednesday?:
+    | T
+    | {
+        tasks?: T;
+        hours?: T;
+        notes?: T;
+      };
+  thursday?:
+    | T
+    | {
+        tasks?: T;
+        hours?: T;
+        notes?: T;
+      };
+  friday?:
+    | T
+    | {
+        tasks?: T;
+        hours?: T;
+        notes?: T;
+      };
+  totalHours?: T;
+  status?: T;
   updatedAt?: T;
   createdAt?: T;
 }
