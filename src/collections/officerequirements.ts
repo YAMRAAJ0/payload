@@ -129,7 +129,6 @@ const OfficeRequirements: CollectionConfig = {
       type: "upload",
       relationTo: "media",
       label: "Supporting Documents",
-      multiple: true,
     },
     {
       name: "notes",

@@ -1,5 +1,4 @@
 import { CollectionConfig } from "payload";
-
 const OfficeExpenses: CollectionConfig = {
   slug: "officeexpenses",
   admin: {
@@ -67,5 +66,4 @@ const OfficeExpenses: CollectionConfig = {
     },
   ],
 };
-
 export default OfficeExpenses;
