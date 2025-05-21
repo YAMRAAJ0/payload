@@ -11,9 +11,10 @@ export const Users: CollectionConfig = {
       // Only allow users with 'owner' or 'employee' role to create
       return user?.roles?.includes('owner') || user?.roles?.includes('employee') || false
     },
-    read: ({ req }) => {
-      // Allow everyone to read their own profile
-      return req.user?.id === req.data?.id
+    read: ({ req: { user }, data }) => {
+      // Allow users with 'owner' or 'employee' role to view all users
+      // Allow regular users to view their own profile
+      return (user?.roles?.includes('owner') || user?.roles?.includes('employee')) || user?.id === data?.id
     },
     update: ({ req: { user } }) => {
       // Only allow users with 'owner' or 'employee' role to update
